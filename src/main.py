@@ -2,8 +2,8 @@ __author__ = 'Dror Paz'
 
 from pathlib import Path
 
-from csv_parser import is_valid_file, parse_csv
-from tables_generators import generate_by_instructor, generate_by_group
+from .csv_parser import is_valid_file, parse_csv
+from .tables_generators import generate_by_instructor, generate_by_group
 
 
 def _exit():
@@ -69,7 +69,3 @@ def wizo_schedules_generator():
     print(f'Creating schedule and saving to {output_location}')
     dataframe = parse_csv(input_csv)
     GROUP_BY[grouping_num][1](dataframe=dataframe, output_location=output_location)
-
-
-if __name__ == '__main__':
-    wizo_schedules_generator()

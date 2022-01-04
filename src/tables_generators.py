@@ -5,7 +5,7 @@ from pathlib import Path
 from pandas import DataFrame
 from weasyprint import HTML
 
-from templates import PDF_TEMPLATE, TABLE_STYLE
+from .templates import PDF_TEMPLATE, TABLE_STYLE
 
 TIME_COLUMN = 'זמן'
 
