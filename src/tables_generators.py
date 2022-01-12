@@ -8,6 +8,7 @@ from weasyprint import HTML
 from .templates import PDF_TEMPLATE, TABLE_STYLE
 
 TIME_COLUMN = 'זמן'
+RESTRICTED_CHARS = '"?*/\\'
 
 
 def df_to_pdf(df: DataFrame, name: str, output_location: Path):
@@ -28,7 +29,8 @@ def df_to_pdf(df: DataFrame, name: str, output_location: Path):
     template_vars = {"title": f'לו"ז שבועי של {name}',
                      "table": html}
     html_out = PDF_TEMPLATE.render(template_vars)
-    out_file = Path(output_location / f'{name}.pdf')
+    file_name = [i for i in name if i not in RESTRICTED_CHARS]
+    out_file = Path(output_location / f'{file_name}.pdf')
     print(f'Writing {out_file}')
     HTML(string=html_out).write_pdf(out_file)
 
