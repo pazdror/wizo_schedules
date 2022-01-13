@@ -3,7 +3,6 @@ __author__ = 'Dror Paz'
 from pathlib import Path
 
 from pandas import DataFrame
-from weasyprint import HTML
 
 from .templates import PDF_TEMPLATE, TABLE_STYLE
 
@@ -30,9 +29,10 @@ def df_to_pdf(df: DataFrame, name: str, output_location: Path):
                      "table": html}
     html_out = PDF_TEMPLATE.render(template_vars)
     file_name = [i for i in name if i not in RESTRICTED_CHARS]
-    out_file = Path(output_location / f'{file_name}.pdf')
+    out_file = Path(output_location / f'{file_name}.html')
     print(f'Writing {out_file}')
-    HTML(string=html_out).write_pdf(out_file)
+    with out_file.open('w') as file:
+        file.write(html_out)
 
 
 def generate_by_instructor(dataframe: DataFrame, output_location: Path):
